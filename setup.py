@@ -20,6 +20,7 @@ setup(
                       "termcolor",
                       "colorama",
                       "click",
+                      "pyzmq",
                       ],
     packages=find_packages(),
     entry_points={

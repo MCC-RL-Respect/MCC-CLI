@@ -1,7 +1,7 @@
 import json
 import requests
 from .utils import to_str
-
+import zmq
 
 class API(object):
 
@@ -102,12 +102,23 @@ class API(object):
         # headers = self._headers_with_auth()
 
         # res = requests.post(url, headers=headers, data=job_config_yaml)
+        url = "tcp://192.168.163.111"
+        port = "20000"
+        context = zmq.Context()
+        # print("Connecting to server...")
+        socket = context.socket(zmq.REQ)
+        socket.connect(url + ":" + port)
 
+        data = str(job_config_yaml)
+        socket.send(data.encode("utf-8"))
+
+        message = socket.recv()
+        # print("Received reply: ", message)
         # if res.ok:
         #     return to_str(res.content)
         # else:
         #     res.raise_for_status()
-        print("Post job config yaml !!!")
+        # print("Post job config yaml !!!")
         # print(job_config_yaml)
 
     def get_user_username_jobs_jobname_ssh(self, username, jobname):
