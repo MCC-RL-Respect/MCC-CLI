@@ -1,7 +1,8 @@
 from setuptools import setup, find_packages
 
-with open('README.md') as f:
-    long_description = f.read()
+# with open('README.md') as f:
+#     long_description = f.read()
+long_description = "mcccli"
 
 setup(
     name='mcccli',

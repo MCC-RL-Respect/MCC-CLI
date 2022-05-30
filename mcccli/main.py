@@ -168,7 +168,7 @@ def submitcmd(job_config_yaml, profile):
         try:
             api.post_user_username_jobs(config.username, _job_config_yaml)
             print(colored("Successfully submitted!", "green") + ": {}"
-                  .format(_job_config_yaml['jobName']))
+                  .format(_job_config_yaml['jobname']))
         except requests.HTTPError as e:
             status_code = e.response.status_code
             if status_code == 401:

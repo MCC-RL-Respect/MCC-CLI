@@ -102,12 +102,11 @@ class API(object):
         # headers = self._headers_with_auth()
 
         # res = requests.post(url, headers=headers, data=job_config_yaml)
-        url = "tcp://192.168.163.111"
-        port = "20000"
+        url = self.config.api_uri_tcp
         context = zmq.Context()
         # print("Connecting to server...")
         socket = context.socket(zmq.REQ)
-        socket.connect(url + ":" + port)
+        socket.connect(url)
 
         data = str(job_config_yaml)
         socket.send(data.encode("utf-8"))

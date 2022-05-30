@@ -28,8 +28,8 @@ class Config(object):
 
     def __init__(self, profile="default"):
         self.profile = to_str(profile)
-        self.host = to_str("10.0.3.9")  # default
-        self._port = 9186  # default
+        self.host = to_str("192.168.4.18")  # default
+        self._port = 30000  # default
         self.username = to_str("")  # default
         self.password = to_str("")  # default
         self.access_token = to_str("")
@@ -75,7 +75,7 @@ class Config(object):
         }
         try:
             with codecs.open(self.path_to_configfile, 'r', 'utf-8') as f:
-                profiles = yaml.load(''.join(f.readlines()))
+                profiles = yaml.load(''.join(f.readlines()), Loader=yaml.FullLoader)
                 profiles[self.profile] = new_config
         except FileNotFoundError:
             profiles[self.profile] = new_config
@@ -100,3 +100,7 @@ class Config(object):
     @property
     def api_uri(self):
         return "http://{}:{}".format(self.host, self.port)
+
+    @property
+    def api_uri_tcp(self):
+        return "tcp://{}:{}".format(self.host, self.port)
